@@ -36,7 +36,7 @@ http {
         }
 
         location /signin {
-            root   /Users/rebro/Desktop/data/www;
+            root   /Users/rebro/Desktop/WORK/Programming/NETOLOGY/04_serlvets/nginx_proxy_auth/authorization_service/src/main/resources/static/www;
             index  index.html index.htm;
         }
 
