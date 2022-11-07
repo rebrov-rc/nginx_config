@@ -6,6 +6,7 @@ import com.example.authorization_service.exceptions.UnauthorizedUser;
 import com.example.authorization_service.repository.Authorities;
 import com.example.authorization_service.repository.User;
 import com.example.authorization_service.services.AuthService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +18,14 @@ import java.util.List;
 public class AuthController {
 
     private AuthService service;
+    @Value("${server.port}")
+    private String str;
 
     public AuthController(AuthService service){
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/auth")
+    @RequestMapping(method = RequestMethod.GET, path = "/authorize")
     public List<Authorities> auth(@Valid User user){
 
         if (isEmpty(user.getName()) || isEmpty(user.getPassword())){
@@ -36,6 +39,10 @@ public class AuthController {
         return userAuthorities;
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/")
+    public String getStr(){
+        return this.str;
+    }
     private boolean isEmpty(List<?> str){
         return str == null || str.isEmpty();
     }
